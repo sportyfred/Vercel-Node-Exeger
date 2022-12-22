@@ -10,12 +10,12 @@ let datum = [];
 let bid = [];
 let kurs = [];
 let ask = [];
-/*app.use(express.static('public'))
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: path.join(__dirname, 'public')});
 })
-*/
+
 
 app.get('/api', (req, res) => {
 
