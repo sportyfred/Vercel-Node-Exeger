@@ -4,7 +4,6 @@ const request = require("request");
 const url = 'http://share.paretosec.com/upload/files/OTC_prices_web.pdf';
 const express = require('express')
 const app = express()
-app.listen(process.env.PORT || 3000);
 
 // All of the parse patients
 let datum = [];
@@ -17,7 +16,7 @@ app.get('/', (req, res) => {
   res.sendFile('index.html', {root: path.join(__dirname, 'public')});
 })
 
-
+app.get('/api', (req, res) => {
 const promise = new Promise((resolve, reject) => {
         request({uri: 'http://share.paretosec.com/upload/files/OTC_prices_web.pdf', encoding: null, headers: { 'Content-type' : 'applcation/pdf' }} , function (error, response, body) {
  if (!error && response.statusCode == 200) {
@@ -54,17 +53,29 @@ datum.push(etrim);
 bid.push(pdfData.Pages[0].Texts[22].R[0].T);
 kurs.push(pdfData.Pages[0].Texts[24].R[0].T);
 ask.push(pdfData.Pages[0].Texts[23].R[0].T);
-});
+}).then(etrim =>{
+
+res.json({ "bid": bid[0], "kurs": kurs[0], "ask": ask[0], "date": datum[0]}, null, 3);
+console.log('send');
+
+          });
 
         });
 
 
-app.get('/api', (req, res) => {
-res.json({ "bid": bid[0], "kurs": kurs[0], "ask": ask[0], "date": datum[0]}, null, 3);
 
 
-})
+
 });
 
+
+
+
+
+
+
+
+});
+app.listen(process.env.PORT || 3000);
 
 module.exports = app;
