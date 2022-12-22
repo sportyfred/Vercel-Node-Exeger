@@ -2,16 +2,14 @@
   "name": "vercel-node-exeger",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "pdf2json": "^1.1.8",
     "request": "^2.88.2"
   },
-  "scripts": {
-    "start": "node server.js"
-  },
+ 
   "keywords": [],
   "author": "",
   "license": "MIT"
