@@ -10,6 +10,7 @@ let datum = [];
 let bid = [];
 let kurs = [];
 let ask = [];
+let mupp = [];
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
@@ -37,23 +38,40 @@ const promise = new Promise((resolve, reject) => {
        pdfParser.loadPDF(`pdf.pdf`);
        console.log('parse');
         pdfParser.on("pdfParser_dataReady", (pdfData) => {
-           
-           console.log('pdfData');
+         
+        
  let dtext = pdfData.Pages[0].Texts[0].R[0].T;
+ let bidtext = pdfData.Pages[0].Texts[22].R[0].T;
+let kurstext = pdfData.Pages[0].Texts[24].R[0].T;
+let asktext = pdfData.Pages[0].Texts[23].R[0].T;
+
+      
+
+
            const dpromise = new Promise((resolve, reject) => {
 
-          let ctrim = dtext.replace(/%2C/g, ".");
-           let dtrim = ctrim.replace(/%20/g, " ");
+    let bidtrim = bidtext.replace(/%2C5/g, ".50");
+          let kurstrim = kurstext.replace(/%2C5/g, ".50");
+          let asktrim = asktext.replace(/%2C5/g, ".50");
+           let dtrim = dtext.replace(/%20/g, " ");
            let etrim = dtrim.replace(/%3A/g, ":");
-           resolve (etrim);
+            mupp[0] = etrim;
+              mupp[1] = bidtrim;
+                 mupp[2] = kurstrim;
+                    mupp[3] = asktrim;
+           resolve (mupp);
            });
 
-          dpromise.then(etrim => { 
-datum.push(etrim);
-bid.push(pdfData.Pages[0].Texts[22].R[0].T);
-kurs.push(pdfData.Pages[0].Texts[24].R[0].T);
-ask.push(pdfData.Pages[0].Texts[23].R[0].T);
-}).then(etrim =>{
+
+
+          dpromise.then( mupp => { 
+datum.push(mupp[0]);
+bid.push(mupp[1]);
+kurs.push(mupp[2]);
+ask.push(mupp[3]);
+
+}).then(mupp =>{
+
 
 res.json({ "bid": bid[0], "kurs": kurs[0], "ask": ask[0], "date": datum[0]}, null, 3);
 console.log('send');
