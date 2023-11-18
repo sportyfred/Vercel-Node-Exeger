@@ -50,9 +50,9 @@ let asktext = pdfData.Pages[0].Texts[23].R[0].T;
 
            const dpromise = new Promise((resolve, reject) => {
 
-    let bidtrim = bidtext.replace(/%2C5/g, ".50");
-          let kurstrim = kurstext.replace(/%2C5/g, ".50");
-          let asktrim = asktext.replace(/%2C5/g, ".50");
+    let bidtrim = bidtext.replace(/%2C/g, ".");
+          let kurstrim = kurstext.replace(/%2C/g, ".5");
+          let asktrim = asktext.replace(/%2C/g, ".5");
            let dtrim = dtext.replace(/%20/g, " ");
            let etrim = dtrim.replace(/%3A/g, ":");
             mupp[0] = etrim;
