@@ -42,7 +42,7 @@ const promise = new Promise((resolve, reject) => {
  let dtext = pdfData.Pages[0].Texts[0].R[0].T;
            const dpromise = new Promise((resolve, reject) => {
 
-          let ctrim = dtext.replace(/%5C/g, ".");
+          let ctrim = dtext.replace(/%2C/g, ".");
            let dtrim = ctrim.replace(/%20/g, " ");
            let etrim = dtrim.replace(/%3A/g, ":");
            resolve (etrim);
