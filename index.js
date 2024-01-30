@@ -41,9 +41,9 @@ const promise = new Promise((resolve, reject) => {
          
         
  let dtext = pdfData.Pages[0].Texts[0].R[0].T;
- let bidtext = pdfData.Pages[0].Texts[22].R[0].T;
-let kurstext = pdfData.Pages[0].Texts[24].R[0].T;
-let asktext = pdfData.Pages[0].Texts[23].R[0].T;
+ let bidtext = pdfData.Pages[0].Texts[30].R[0].T;
+let kurstext = pdfData.Pages[0].Texts[32].R[0].T;
+let asktext = pdfData.Pages[0].Texts[31].R[0].T;
 
       
 
